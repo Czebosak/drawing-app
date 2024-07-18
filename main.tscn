@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://j2sulfr5atr3"]
+
+[ext_resource type="PackedScene" uid="uid://dvxhosqbcwawa" path="res://src/ui/ui.tscn" id="1_bdrus"]
+[ext_resource type="Shader" path="res://main.gdshader" id="2_4jxc6"]
+[ext_resource type="Script" path="res://src/scripts/cursor.gd" id="2_37r01"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8isf"]
+shader = ExtResource("2_4jxc6")
+shader_parameter/zoom = 100.0
+shader_parameter/pixel_scale = 50.0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" parent="." instance=ExtResource("1_bdrus")]
+layout_mode = 1
+
+[node name="Cursor" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+script = ExtResource("2_37r01")
+
+[node name="ColorRect" type="ColorRect" parent="Cursor"]
+material = SubResource("ShaderMaterial_d8isf")
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0

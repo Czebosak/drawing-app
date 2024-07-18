@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgy4yaruk8aog"]
+
+[ext_resource type="Script" path="res://src/ui/viewport.gd" id="1_gveif"]
+[ext_resource type="PackedScene" uid="uid://dm6wqhvlmjbwg" path="res://src/ui/canvas.tscn" id="1_nnlpd"]
+
+[node name="Viewport" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_gveif")
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="ViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="CanvasContainer" type="SubViewportContainer" parent="ViewportContainer/Viewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="Canvas" parent="ViewportContainer/Viewport/CanvasContainer" instance=ExtResource("1_nnlpd")]
+
+[node name="Camera" type="Camera2D" parent="ViewportContainer/Viewport"]

@@ -1,0 +1,132 @@
+[gd_scene load_steps=13 format=3 uid="uid://dvxhosqbcwawa"]
+
+[ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="2_mfa1o"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="3_1vaxv"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="3_iro3p"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="4_yi7hc"]
+[ext_resource type="PackedScene" uid="uid://bgy4yaruk8aog" path="res://src/ui/viewport.tscn" id="5_n8cmx"]
+[ext_resource type="Script" path="res://src/ui/toolbar.gd" id="5_xe6o2"]
+
+[sub_resource type="Resource" id="Resource_l6t5t"]
+resource_name = "Tabs"
+script = ExtResource("3_1vaxv")
+names = PackedStringArray("Color Pickers")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_nrp2l"]
+resource_name = "Tabs"
+script = ExtResource("3_1vaxv")
+names = PackedStringArray("Toolbar")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_8yht3"]
+resource_name = "Split"
+script = ExtResource("3_iro3p")
+direction = 1
+percent = 0.2
+first = SubResource("Resource_l6t5t")
+second = SubResource("Resource_nrp2l")
+
+[sub_resource type="Resource" id="Resource_0dwrn"]
+resource_name = "Tabs"
+script = ExtResource("3_1vaxv")
+names = PackedStringArray("Viewport")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_jcpss"]
+resource_name = "Split"
+script = ExtResource("3_iro3p")
+direction = 0
+percent = 0.1
+first = SubResource("Resource_8yht3")
+second = SubResource("Resource_0dwrn")
+
+[sub_resource type="Resource" id="Resource_ty2ip"]
+resource_name = "Layout"
+script = ExtResource("4_yi7hc")
+root = SubResource("Resource_jcpss")
+hidden_tabs = {}
+
+[node name="UI" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="DockableContainer" type="Container" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+script = ExtResource("2_mfa1o")
+layout = SubResource("Resource_ty2ip")
+
+[node name="Toolbar" type="ScrollContainer" parent="VBoxContainer/MarginContainer/DockableContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("5_xe6o2")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/DockableContainer/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/DockableContainer/Toolbar/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/DockableContainer/Toolbar/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Pencil"
+
+[node name="Viewport" parent="VBoxContainer/MarginContainer/DockableContainer" instance=ExtResource("5_n8cmx")]
+layout_mode = 2
+
+[node name="Color Pickers" type="MarginContainer" parent="VBoxContainer/MarginContainer/DockableContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers"]
+layout_mode = 2
+alignment = 1
+
+[node name="Color" type="ColorPickerButton" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers/HFlowContainer"]
+custom_minimum_size = Vector2(35, 5)
+layout_mode = 2
+text = "
+"
+color = Color(1, 1, 1, 1)
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers/HFlowContainer"]
+layout_mode = 2
+text = "S"
+
+[node name="Color2" type="ColorPickerButton" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers/HFlowContainer"]
+custom_minimum_size = Vector2(35, 5)
+layout_mode = 2
+text = "
+"
+color = Color(1, 1, 1, 1)
