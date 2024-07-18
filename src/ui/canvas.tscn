@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm6wqhvlmjbwg"]
+[gd_scene load_steps=3 format=3 uid="uid://dm6wqhvlmjbwg"]
 
 [ext_resource type="Script" path="res://src/ui/canvas.gd" id="1_pup5k"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_t60h1"]
 
 [node name="Canvas" type="SubViewport"]
 disable_3d = true
@@ -10,9 +12,9 @@ render_target_update_mode = 4
 script = ExtResource("1_pup5k")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = SubResource("ImageTexture_t60h1")

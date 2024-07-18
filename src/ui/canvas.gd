@@ -2,6 +2,8 @@ class_name Canvas extends SubViewport
 
 @onready var texture_rect: TextureRect = $TextureRect
 
+var buffer := []
+
 func new_image(width: int, height: int, color: Color):
 	var image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	image.fill(color)
@@ -18,21 +20,21 @@ func draw(pos: Vector2, color: Color):
 var last_mouse_pos: Vector2i
 
 func draw_at_mouse_pos(color: Color):
-	var mouse_pos = get_rel_mouse_pos()
+	var mouse_pos: Vector2i = floor(get_rel_mouse_pos() - Vector2(0.5, 0.5)) # Subtract 0.5 and round down to get value aligned to grid
+	print(get_rel_mouse_pos())
+	print(floor(get_rel_mouse_pos() - Vector2(0.5, 0.5)))
 	
 	if mouse_pos == last_mouse_pos:
 		return
 	
-	if mouse_pos[mouse_pos.min_axis_index()] <= 0 or mouse_pos.x >= size.x or mouse_pos.y >= size.y:
-		return
-	
-	if last_mouse_pos == Vector2i(0, 0):
-		draw(mouse_pos, color)
-	else:
-		var points = bresenham_line(last_mouse_pos, mouse_pos)
-		
-		for point in points:
-			draw(point, color)
+	if mouse_pos[mouse_pos.min_axis_index()] >= 0 and mouse_pos.x <= size.x and mouse_pos.y <= size.y:
+		if last_mouse_pos == Vector2i(0, 0):
+			draw(mouse_pos, color)
+		else:
+			var points = bresenham_line(last_mouse_pos, mouse_pos)
+			
+			for point in points:
+				draw(point, color)
 	
 	last_mouse_pos = mouse_pos
 
@@ -72,6 +74,5 @@ func bresenham_line(start: Vector2i, end: Vector2i) -> Array:
 	
 	return points
 
-func get_rel_mouse_pos() -> Vector2i:
+func get_rel_mouse_pos() -> Vector2:
 	return get_viewport().get_mouse_position()
-

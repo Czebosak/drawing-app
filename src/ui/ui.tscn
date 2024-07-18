@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvxhosqbcwawa"]
+[gd_scene load_steps=14 format=3 uid="uid://dvxhosqbcwawa"]
 
 [ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="2_mfa1o"]
 [ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="3_1vaxv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="4_yi7hc"]
 [ext_resource type="PackedScene" uid="uid://bgy4yaruk8aog" path="res://src/ui/viewport.tscn" id="5_n8cmx"]
 [ext_resource type="Script" path="res://src/ui/toolbar.gd" id="5_xe6o2"]
+[ext_resource type="PackedScene" uid="uid://dmympt2xsl3vm" path="res://src/ui/color_pickers.tscn" id="7_2fncj"]
 
 [sub_resource type="Resource" id="Resource_l6t5t"]
 resource_name = "Tabs"
@@ -102,31 +103,5 @@ text = "Pencil"
 [node name="Viewport" parent="VBoxContainer/MarginContainer/DockableContainer" instance=ExtResource("5_n8cmx")]
 layout_mode = 2
 
-[node name="Color Pickers" type="MarginContainer" parent="VBoxContainer/MarginContainer/DockableContainer"]
+[node name="Color Pickers" parent="VBoxContainer/MarginContainer/DockableContainer" instance=ExtResource("7_2fncj")]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers"]
-layout_mode = 2
-alignment = 1
-
-[node name="Color" type="ColorPickerButton" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers/HFlowContainer"]
-custom_minimum_size = Vector2(35, 5)
-layout_mode = 2
-text = "
-"
-color = Color(1, 1, 1, 1)
-
-[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers/HFlowContainer"]
-layout_mode = 2
-text = "S"
-
-[node name="Color2" type="ColorPickerButton" parent="VBoxContainer/MarginContainer/DockableContainer/Color Pickers/HFlowContainer"]
-custom_minimum_size = Vector2(35, 5)
-layout_mode = 2
-text = "
-"
-color = Color(1, 1, 1, 1)

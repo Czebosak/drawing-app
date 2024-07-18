@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgy4yaruk8aog"]
+[gd_scene load_steps=4 format=3 uid="uid://bgy4yaruk8aog"]
 
 [ext_resource type="Script" path="res://src/ui/viewport.gd" id="1_gveif"]
 [ext_resource type="PackedScene" uid="uid://dm6wqhvlmjbwg" path="res://src/ui/canvas.tscn" id="1_nnlpd"]
+[ext_resource type="Script" path="res://src/ui/ViewportCamera.gd" id="3_wyo7y"]
 
 [node name="Viewport" type="Control"]
 layout_mode = 3
@@ -29,6 +30,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="CanvasContainer" type="SubViewportContainer" parent="ViewportContainer/Viewport"]
+texture_filter = 5
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,4 +46,7 @@ stretch = true
 
 [node name="Canvas" parent="ViewportContainer/Viewport/CanvasContainer" instance=ExtResource("1_nnlpd")]
 
-[node name="Camera" type="Camera2D" parent="ViewportContainer/Viewport"]
+[node name="ViewportCamera" type="Camera2D" parent="ViewportContainer/Viewport"]
+script = ExtResource("3_wyo7y")
+
+[connection signal="resized" from="." to="." method="_on_resized"]
