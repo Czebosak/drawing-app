@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://j2sulfr5atr3"]
 
-[ext_resource type="PackedScene" uid="uid://dvxhosqbcwawa" path="res://src/ui/ui.tscn" id="1_bdrus"]
+[ext_resource type="PackedScene" path="res://src/ui/ui.tscn" id="1_bdrus"]
 [ext_resource type="Shader" path="res://main.gdshader" id="2_4jxc6"]
 [ext_resource type="Script" path="res://src/scripts/cursor.gd" id="2_37r01"]
 

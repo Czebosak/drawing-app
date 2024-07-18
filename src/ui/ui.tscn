@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvxhosqbcwawa"]
+[gd_scene load_steps=14 format=3 uid="uid://ck5b866dujgsk"]
 
 [ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="2_mfa1o"]
 [ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="3_1vaxv"]

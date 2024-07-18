@@ -1,0 +1,157 @@
+[gd_scene load_steps=18 format=3 uid="uid://byew64ln4vef5"]
+
+[ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="1_hssso"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="2_o7egk"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="3_hyisy"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="4_thdoc"]
+[ext_resource type="Script" path="res://addons/dockable_container/split_handle.gd" id="5_geegc"]
+[ext_resource type="Script" path="res://addons/dockable_container/dockable_panel.gd" id="6_r5u68"]
+[ext_resource type="Script" path="res://addons/dockable_container/dockable_panel_reference_control.gd" id="7_dxg12"]
+[ext_resource type="Script" path="res://src/ui/toolbar.gd" id="8_oksm5"]
+[ext_resource type="PackedScene" uid="uid://bgy4yaruk8aog" path="res://src/ui/viewport.tscn" id="9_iolr6"]
+[ext_resource type="PackedScene" uid="uid://dmympt2xsl3vm" path="res://src/ui/color_pickers.tscn" id="10_mihmh"]
+[ext_resource type="Script" path="res://addons/dockable_container/drag_n_drop_panel.gd" id="11_u3dev"]
+
+[sub_resource type="Resource" id="Resource_l6t5t"]
+resource_name = "Tabs"
+script = ExtResource("2_o7egk")
+names = PackedStringArray("Color Pickers")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_nrp2l"]
+resource_name = "Tabs"
+script = ExtResource("2_o7egk")
+names = PackedStringArray("Toolbar")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_8yht3"]
+resource_name = "Split"
+script = ExtResource("3_hyisy")
+direction = 1
+percent = 0.2
+first = SubResource("Resource_l6t5t")
+second = SubResource("Resource_nrp2l")
+
+[sub_resource type="Resource" id="Resource_0dwrn"]
+resource_name = "Tabs"
+script = ExtResource("2_o7egk")
+names = PackedStringArray("Viewport")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_jcpss"]
+resource_name = "Split"
+script = ExtResource("3_hyisy")
+direction = 0
+percent = 0.1
+first = SubResource("Resource_8yht3")
+second = SubResource("Resource_0dwrn")
+
+[sub_resource type="Resource" id="Resource_ty2ip"]
+resource_name = "Layout"
+script = ExtResource("4_thdoc")
+root = SubResource("Resource_jcpss")
+hidden_tabs = {}
+
+[node name="MainUI" type="MarginContainer"]
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="DockableContainer" type="Container" parent="."]
+layout_mode = 2
+script = ExtResource("1_hssso")
+layout = SubResource("Resource_ty2ip")
+
+[node name="_panel_container" type="Container" parent="DockableContainer"]
+layout_mode = 2
+
+[node name="_split_container" type="Container" parent="DockableContainer/_panel_container"]
+layout_mode = 2
+
+[node name="_Control_202697" type="Control" parent="DockableContainer/_panel_container/_split_container"]
+layout_mode = 2
+script = ExtResource("5_geegc")
+
+[node name="_Control_202698" type="Control" parent="DockableContainer/_panel_container/_split_container"]
+layout_mode = 2
+script = ExtResource("5_geegc")
+
+[node name="_TabContainer_202689" type="TabContainer" parent="DockableContainer/_panel_container"]
+layout_mode = 2
+tab_alignment = 1
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("6_r5u68")
+
+[node name="_Container_202690" type="Container" parent="DockableContainer/_panel_container/_TabContainer_202689"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("7_dxg12")
+metadata/_tab_name = "Viewport"
+
+[node name="_TabContainer_202692" type="TabContainer" parent="DockableContainer/_panel_container"]
+layout_mode = 2
+tab_alignment = 1
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("6_r5u68")
+
+[node name="_Container_202693" type="Container" parent="DockableContainer/_panel_container/_TabContainer_202692"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("7_dxg12")
+metadata/_tab_name = "Toolbar"
+
+[node name="_TabContainer_202695" type="TabContainer" parent="DockableContainer/_panel_container"]
+layout_mode = 2
+tab_alignment = 1
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("6_r5u68")
+
+[node name="_Container_202696" type="Container" parent="DockableContainer/_panel_container/_TabContainer_202695"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("7_dxg12")
+metadata/_tab_name = "Color Pickers"
+
+[node name="Toolbar" type="ScrollContainer" parent="DockableContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("8_oksm5")
+
+[node name="MarginContainer" type="MarginContainer" parent="DockableContainer/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DockableContainer/Toolbar/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Button" type="Button" parent="DockableContainer/Toolbar/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Pencil"
+
+[node name="Viewport" parent="DockableContainer" instance=ExtResource("9_iolr6")]
+layout_mode = 2
+
+[node name="Color Pickers" parent="DockableContainer" instance=ExtResource("10_mihmh")]
+layout_mode = 2
+
+[node name="_drag_n_drop_panel" type="Control" parent="DockableContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("11_u3dev")

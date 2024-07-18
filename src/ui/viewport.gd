@@ -27,10 +27,8 @@ func _input(event):
 		elif event.button_index == MOUSE_BUTTON_LEFT:
 			if drawing:
 				drawing = false
-				Input.use_accumulated_input = true
-			else:
+			elif event.pressed:
 				drawing = true
-				Input.use_accumulated_input = false
 				canvas.draw_at_mouse_pos(Color(0.0, 0.0, 0.0, 1.0))
 		elif event.pressed:
 			match event.button_index:
